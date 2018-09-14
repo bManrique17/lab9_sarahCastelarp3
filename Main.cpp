@@ -36,7 +36,7 @@ vector<Tropa*> tropasj2;
 
 
 bool esJ1 = true;
-int numJugador1, numJugador2, jugadorActual;
+int numJugador1, numJugador2, numCivi = 0;
 int cantOro, cantMadera, cantPiedra, cantAlimentos;
 int menu();
 void crearCivilizacion();
@@ -176,7 +176,6 @@ void crearJugador(){
     if (!vectorCivilizacion.empty()){
         Jugador* j;
         string nombre;
-        int numCivi;
 
         printCivilizacion();
         cout<<"Escoger numero de civilizacion a la que quiere pertencer: "<<endl;
@@ -196,10 +195,10 @@ void estadoActual(){
         cout<<"Aldeanos Disponibles: "<< aldeanosj1.size()+1 << endl;
         //int cantOro, cantMadera, cantPiedra, cantAlimentos;
         //cantOro = vectorCivilizacion[numJugador1]->getOro();
-        cantOro = vectorJugadores[numJugador1]->getCivilizacion().getOro();
-        cantMadera = vectorJugadores[numJugador1]->getCivilizacion().getMadera();
-        cantPiedra = vectorJugadores[numJugador1]->getCivilizacion().getPiedra();
-        cantAlimentos = vectorJugadores[numJugador1]->getCivilizacion().getAlimento();
+        cantOro = vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getOro();
+        cantMadera = vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getMadera();
+        cantPiedra = vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getPiedra();
+        cantAlimentos = vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getAlimento();
 
        // cantMadera = vectorCivilizacion[numJugador1]->getMadera();
        // cantPiedra = vectorCivilizacion[numJugador1]->getPiedra();
@@ -212,10 +211,10 @@ void estadoActual(){
         cantMadera = vectorCivilizacion[numJugador2]->getMadera();
         cantPiedra = vectorCivilizacion[numJugador2]->getPiedra();
         cantAlimentos = totalAlimentoAldeanos();*/
-        cantOro = vectorJugadores[numJugador2]->getCivilizacion().getOro();
-        cantMadera = vectorJugadores[numJugador2]->getCivilizacion().getMadera();
-        cantPiedra = vectorJugadores[numJugador2]->getCivilizacion().getPiedra();
-        cantAlimentos = vectorJugadores[numJugador2]->getCivilizacion().getAlimento();
+        cantOro = vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getOro();
+        cantMadera = vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getMadera();
+        cantPiedra = vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getPiedra();
+        cantAlimentos = vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getAlimento();
     }
 }
 
@@ -225,12 +224,12 @@ int totalAlimentoAldeanos(){
     if(esJ1){
         for(int i = 0; i < aldeanosj1.size(); i++){
         //totalAlimento += aldeanosj1[i]->getCostoAlimentacion();
-        totalAlimento += vectorJugadores[numJugador1]->getCivilizacion().getAldeano(i)->getCostoAlimentacion();
+        totalAlimento += vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getAldeano(i)->getCostoAlimentacion();
         }
     }else{
         for(int i = 0; i < aldeanosj2.size(); i++){
       //  totalAlimento += aldeanosj2[i]->getCostoAlimentacion();
-            totalAlimento += vectorJugadores[numJugador2]->getCivilizacion().getAldeano(i)->getCostoAlimentacion();
+            totalAlimento += vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getAldeano(i)->getCostoAlimentacion();
         }
     }
     
@@ -240,17 +239,17 @@ int totalAlimentoAldeanos(){
 void agregarCasa(){
      if(esJ1){
         if ( (cantMadera-50) > -1 ){
-            int pobMax = vectorJugadores[numJugador1]->getCivilizacion().getPoblacionMaxima();
-            int pobAct = vectorJugadores[numJugador1]->getCivilizacion().getPoblacionActual();
-            int capMax = vectorJugadores[numJugador1]->getCivilizacion().getCapacidadPoblacion();
+            int pobMax = vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getPoblacionMaxima();
+            int pobAct = vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getPoblacionActual();
+            int capMax = vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getCapacidadPoblacion();
 
             if ( (pobAct+5) > capMax ){
                 cout<<"Lo sentimos. No puede comprar mas casas porque ya llego al limite de poblacion."<<endl;
             }else{
                 //edificiosj1.push_back( new Casas(0,50,0));
                 //casasj1.push_back(new Casas(0,50,0));
-                vectorJugadores[numJugador1]->getCivilizacion().setEdificios(new Casas(0,50,0));
-                vectorJugadores[numJugador1]->getCivilizacion().setPoblacionActual(pobAct + 5);
+                vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setEdificios(new Casas(0,50,0));
+                vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setPoblacionActual(pobAct + 5);
                // vectorCivilizacion[numJugador1]->setPoblacionActual(pobAct + 5);
                 cout<<"Casa agregada exitosamente."<<endl;
             }
@@ -258,17 +257,17 @@ void agregarCasa(){
             cout <<"No tienes suficientes recursos."<<endl;
     }else { //significa que es el turno de j2
         if ( (cantMadera-50) > -1 ){       
-            int pobMax = vectorJugadores[numJugador2]->getCivilizacion().getPoblacionMaxima();
-            int pobAct = vectorJugadores[numJugador2]->getCivilizacion().getPoblacionActual();
-            int capMax = vectorJugadores[numJugador2]->getCivilizacion().getCapacidadPoblacion();
+            int pobMax = vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getPoblacionMaxima();
+            int pobAct = vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getPoblacionActual();
+            int capMax = vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getCapacidadPoblacion();
 
             if ( (pobAct+5) > capMax ){
                 cout<<"Lo sentimos. No puede comprar mas casas porque ya llego al limite de poblacion."<<endl;
             }else{
                // edificiosj2.push_back( new Casas(0,50,0));
                 //casasj2.push_back(new Casas(0,50,0));
-                vectorJugadores[numJugador2]->getCivilizacion().setEdificios(new Casas(0,50,0));
-                vectorJugadores[numJugador2]->getCivilizacion().setPoblacionActual(pobAct + 5);
+                vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setEdificios(new Casas(0,50,0));
+                vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setPoblacionActual(pobAct + 5);
                 //vectorCivilizacion[numJugador2]->setPoblacionActual(pobAct + 5);
                 cout<<"Casa agregada exitosamente."<<endl; }
         }else 
@@ -284,17 +283,17 @@ void agregarCuartel(){
             //cuartelesj1.push_back( new Cuarteles(0,120,80,false,false));
            // vectorCivilizacion[numJugador1]->setMadera( vectorCivilizacion[numJugador1]->getMadera() - 120 );
             //vectorCivilizacion[numJugador1]->setPiedra( vectorCivilizacion[numJugador1]->getPiedra() - 80 );
-            vectorJugadores[numJugador1]->getCivilizacion().setEdificios(new Cuarteles(0,120,80,false,false));
-            vectorJugadores[numJugador1]->getCivilizacion().setMadera( vectorJugadores[numJugador1]->getCivilizacion().getMadera() -120 );
-            vectorJugadores[numJugador1]->getCivilizacion().setPiedra( vectorJugadores[numJugador1]->getCivilizacion().getPiedra() - 80 );
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setEdificios(new Cuarteles(0,120,80,false,false));
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setMadera( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getMadera() -120 );
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setPiedra( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getPiedra() - 80 );
             cout<<"Cuartel comprado exitosamente." <<endl;
         }else
             cout<<"No tiene suficientes recursos."<<endl;
     }else {//no es j1
         if ( ((cantMadera-120) > -1) && ((cantPiedra-80) > -1) ){ //ver si tiene lo necesario para comprar
-            vectorJugadores[numJugador2]->getCivilizacion().setEdificios(new Cuarteles(0,120,80,false,false));
-            vectorJugadores[numJugador2]->getCivilizacion().setMadera( vectorJugadores[numJugador2]->getCivilizacion().getMadera() -120 );
-            vectorJugadores[numJugador2]->getCivilizacion().setPiedra( vectorJugadores[numJugador2]->getCivilizacion().getPiedra() - 80 );
+            vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setEdificios(new Cuarteles(0,120,80,false,false));
+            vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setMadera( vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getMadera() -120 );
+            vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setPiedra( vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getPiedra() - 80 );
             cout<<"Cuartel comprado exitosamente." <<endl;
         }else
             cout<<"No tiene suficientes recursos."<<endl;
@@ -308,17 +307,17 @@ void agregarCastillo(){
            // castillosj1.push_back( new Castillos(0,275,200,false));
            // vectorCivilizacion[numJugador1]->setMadera( vectorCivilizacion[numJugador1]->getMadera() - 275 );
            // vectorCivilizacion[numJugador1]->setPiedra( vectorCivilizacion[numJugador1]->getPiedra() - 200 );
-            vectorJugadores[numJugador1]->getCivilizacion().setEdificios(new Castillos(0,275,200,false));
-            vectorJugadores[numJugador1]->getCivilizacion().setMadera( vectorJugadores[numJugador1]->getCivilizacion().getMadera() - 275 );
-            vectorJugadores[numJugador1]->getCivilizacion().setPiedra( vectorJugadores[numJugador1]->getCivilizacion().getPiedra() - 200 );
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setEdificios(new Castillos(0,275,200,false));
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setMadera( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getMadera() - 275 );
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setPiedra( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getPiedra() - 200 );
             cout<<"Castillo comprado exitosamente." <<endl;
         }else
             cout<<"No tiene suficientes recursos."<<endl;
     }else {//no es j1
         if ( ((cantMadera-275) > -1) && ((cantPiedra-200) > -1) ){ //ver si tiene lo necesario para comprar
-            vectorJugadores[numJugador2]->getCivilizacion().setEdificios(new Castillos(0,275,200,false));
-            vectorJugadores[numJugador2]->getCivilizacion().setMadera( vectorJugadores[numJugador2]->getCivilizacion().getMadera() - 275 );
-            vectorJugadores[numJugador2]->getCivilizacion().setPiedra( vectorJugadores[numJugador2]->getCivilizacion().getPiedra() - 200 );
+            vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setEdificios(new Castillos(0,275,200,false));
+            vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setMadera( vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getMadera() - 275 );
+            vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setPiedra( vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getPiedra() - 200 );
             cout<<"Cuartel comprado exitosamente." <<endl;
         }else
             cout<<"No tiene suficientes recursos."<<endl;
@@ -336,9 +335,9 @@ void nuevoAldeano(){
     cin >> costoAlimentacion;
     a = new Aldeanos(sexo, costoAlimentacion);
     if (esJ1){ //verificar si es el primer jugador
-        vectorJugadores[numJugador1]->getCivilizacion().setAldeanos(a);
+        vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setAldeanos(a);
     }else
-        vectorJugadores[numJugador2]->getCivilizacion().setAldeanos(a);
+        vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setAldeanos(a);
     cout<<"Aldeano agregado exitosamente."<<endl;
 }
 
@@ -347,40 +346,40 @@ void buscarRecursos(){
     int plusMadera, plusPiedra, plusOro, plusAldeano;
     if ((total-55) > 0){
         if (esJ1){
-            if (vectorJugadores[numJugador1]->getCivilizacion().getSizevAldeanos() > 0){
+            if (vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getSizevAldeanos() > 0){
                 //recogen recursos todos los aldeanos y la civilizacion en general. 
-                for(int i = 0; i < vectorJugadores[numJugador1]->getCivilizacion().getSizevAldeanos(); i++){
-                    plusAldeano = vectorJugadores[numJugador1]->getCivilizacion().getAldeano(i)->getCostoAlimentacion() + 50;
-                    vectorJugadores[numJugador1]->getCivilizacion().getAldeano(i)->setCostoAlimentacion( plusAldeano );
-                    plusMadera += vectorJugadores[numJugador1]->getCivilizacion().getMadera() + 40;
-                    plusOro += vectorJugadores[numJugador1]->getCivilizacion().getOro() + 30;
-                    plusPiedra += vectorJugadores[numJugador1]->getCivilizacion().getPiedra() + 20;
+                for(int i = 0; i < vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getSizevAldeanos(); i++){
+                    plusAldeano = vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getAldeano(i)->getCostoAlimentacion() + 50;
+                    vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getAldeano(i)->setCostoAlimentacion( plusAldeano );
+                    plusMadera += vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getMadera() + 40;
+                    plusOro += vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getOro() + 30;
+                    plusPiedra += vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getPiedra() + 20;
                 }
-                    vectorJugadores[numJugador1]->getCivilizacion().setMadera( plusMadera );
-                    vectorJugadores[numJugador1]->getCivilizacion().setOro( plusOro );
-                    vectorJugadores[numJugador1]->getCivilizacion().setPiedra( plusPiedra );
+                    vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setMadera( plusMadera );
+                    vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setOro( plusOro );
+                    vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setPiedra( plusPiedra );
 
                 //se le reduce el costo de buscar recursos.. -55
-                if (vectorJugadores[numJugador1]->getCivilizacion().getAlimento() > 55)
-                    vectorJugadores[numJugador1]->getCivilizacion().setAlimento( vectorJugadores[numJugador1]->getCivilizacion().getAlimento() - 55 );
+                if (vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getAlimento() > 55)
+                    vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setAlimento( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getAlimento() - 55 );
             }else
                 cout << "Debe agregar aldeanos para buscar recursos." <<endl;
         }else {
-            if (vectorJugadores[numJugador2]->getCivilizacion().getSizevAldeanos() > 0){
-                for(int i = 0; i < vectorJugadores[numJugador2]->getCivilizacion().getSizevAldeanos(); i++){
-                    plusAldeano = vectorJugadores[numJugador2]->getCivilizacion().getAldeano(i)->getCostoAlimentacion() + 50;
-                    vectorJugadores[numJugador2]->getCivilizacion().getAldeano(i)->setCostoAlimentacion( plusAldeano );
-                    plusMadera += vectorJugadores[numJugador2]->getCivilizacion().getMadera() + 40;
-                    plusOro += vectorJugadores[numJugador2]->getCivilizacion().getOro() + 30;
-                    plusPiedra += vectorJugadores[numJugador2]->getCivilizacion().getPiedra() + 20;
+            if (vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getSizevAldeanos() > 0){
+                for(int i = 0; i < vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getSizevAldeanos(); i++){
+                    plusAldeano = vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getAldeano(i)->getCostoAlimentacion() + 50;
+                    vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getAldeano(i)->setCostoAlimentacion( plusAldeano );
+                    plusMadera += vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getMadera() + 40;
+                    plusOro += vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getOro() + 30;
+                    plusPiedra += vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getPiedra() + 20;
                 }
-                    vectorJugadores[numJugador2]->getCivilizacion().setMadera( plusMadera );
-                    vectorJugadores[numJugador2]->getCivilizacion().setOro( plusOro );
-                    vectorJugadores[numJugador2]->getCivilizacion().setPiedra( plusPiedra );
+                    vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setMadera( plusMadera );
+                    vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setOro( plusOro );
+                    vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setPiedra( plusPiedra );
 
                 //se le reduce el costo de buscar recursos.. -55
-                if (vectorJugadores[numJugador2]->getCivilizacion().getAlimento() > 55)
-                    vectorJugadores[numJugador2]->getCivilizacion().setAlimento( vectorJugadores[numJugador2]->getCivilizacion().getAlimento() - 55 );
+                if (vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getAlimento() > 55)
+                    vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setAlimento( vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getAlimento() - 55 );
             }else
                 cout << "Debe agregar aldeanos para buscar recursos." <<endl;
         }
@@ -418,25 +417,51 @@ void nuevoEdificio(){
     }
 }
 
+bool hayCuarteles(){
+    Edificio* e;
+    bool siHay = false;
+
+    if (esJ1){
+        for(int i = 0; i < vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getSizevEdificios(); i++){
+        e = static_cast<Cuarteles*>(vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getEdificio(i));
+            if (e!=NULL){
+                siHay = true;
+            }
+        }
+    }else{
+        for(int i = 0; i < vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getSizevEdificios(); i++){
+        e = static_cast<Cuarteles*>(vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getEdificio(i));
+            if (e!=NULL){
+                siHay = true;
+            }
+        }   
+    }
+
+    return siHay;
+}
+
 void agregarSoldado(){
     if(esJ1){
-        if(!cuartelesj1.empty()){//si no esta vacio si puede entrenar tropas.
-            if ( ((cantAlimentos-90 > -1) && ((cantOro-25) > -1) )){
-                tropasj1.push_back( new Soldados("masculino",20,25,40,20,30,10,2));
-                vectorCivilizacion[numJugador1]->setAlimento( vectorCivilizacion[numJugador1]->getAlimento() - 90);
-                vectorCivilizacion[numJugador1]->setOro( vectorCivilizacion[numJugador1]->getOro() - 25);
+
+        if(hayCuarteles()){//si no esta vacio si puede entrenar tropas.
+            if ( ((cantAlimentos-90) > -1) && ((cantOro-25) > -1) ){
+                vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setTropas(new Soldados("masculino",20,25,40,20,30,10,2));
+                vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setAlimento( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getAlimento() - 90 );
+                vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setOro( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getOro() - 25 );
                 cout<<"Soldado agregado exitosamente. "<<endl;
             }else
                 cout<<"No tiene suficientes recursos."<<endl;
 
         }else
             cout<<"Necesita comprar un cuartel para hacer tropas."<<endl;
+
     }else{
-        if(!cuartelesj2.empty()){//si no esta vacio si puede entrenar tropas.
-            if ( ((cantAlimentos-90 > -1) && ((cantOro-25) > -1) )){
-                tropasj2.push_back( new Soldados("masculino",20,25,40,20,30,10,2));
-                vectorCivilizacion[numJugador2]->setAlimento( vectorCivilizacion[numJugador2]->getAlimento() - 90);
-                vectorCivilizacion[numJugador2]->setOro( vectorCivilizacion[numJugador2]->getOro() - 25);
+
+        if(hayCuarteles()){//si no esta vacio si puede entrenar tropas.
+            if ( ((cantAlimentos-90) > -1) && ((cantOro-25) > -1) ){
+                vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setTropas(new Soldados("masculino",20,25,40,20,30,10,2));
+                vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setAlimento( vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getAlimento() - 90 );
+                vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setOro( vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getOro() - 25 );
                 cout<<"Soldado agregado exitosamente. "<<endl;
             }else
                 cout<<"No tiene suficientes recursos."<<endl;
@@ -447,19 +472,19 @@ void agregarSoldado(){
 
 void agregarCaballeria(){
     if(esJ1){
-        if ( ((cantAlimentos-110 > -1) && ((cantOro-60) > -1) )){
-          tropasj1.push_back(new Caballeria("femenino",50,20,60,70,80,30,1,0));
-          vectorCivilizacion[numJugador1]->setAlimento( vectorCivilizacion[numJugador1]->getAlimento() - 110);
-          vectorCivilizacion[numJugador1]->setOro( vectorCivilizacion[numJugador1]->getOro() - 60);
-          cout<<"Caballeria agregada exitosamente."<<endl;
+        if ( ((cantAlimentos-110) > -1) && ((cantOro-60) > -1) ){
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setTropas(new Caballeria("femenino",50,20,60,70,80,30,1,0));
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setAlimento( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getAlimento() - 110 );
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setOro( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getOro() - 60 );
+            cout<<"Caballeria agregada exitosamente."<<endl;
         }else
             cout<<"No tiene suficientes recursos."<<endl;
     }else{
-        if ( ((cantAlimentos-110 > -1) && ((cantOro-60) > -1) )){
-          tropasj2.push_back(new Caballeria("femenino",50,20,60,70,80,30,1,0));
-          vectorCivilizacion[numJugador2]->setAlimento( vectorCivilizacion[numJugador1]->getAlimento() - 110);
-          vectorCivilizacion[numJugador2]->setOro( vectorCivilizacion[numJugador1]->getOro() - 60);
-          cout<<"Caballeria agregada exitosamente."<<endl;
+        if ( ((cantAlimentos-110) > -1) && ((cantOro-60) > -1) ){
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setTropas(new Caballeria("femenino",50,20,60,70,80,30,1,0));
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setAlimento( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getAlimento() - 110 );
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setOro( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getOro() - 60 );
+            cout<<"Caballeria agregada exitosamente."<<endl;
         }else
             cout<<"No tiene suficientes recursos."<<endl;
     }
@@ -467,27 +492,25 @@ void agregarCaballeria(){
 
 void agregarGuerreroEspecial(){
     if(esJ1){
-        if ( ((cantAlimentos-150 > -1) && ((cantOro-90) > -1) )){
-            tropasj1.push_back(new Caballeria("masculino",100,200,200,200,150,30,1,0));
-          vectorCivilizacion[numJugador1]->setAlimento( vectorCivilizacion[numJugador1]->getAlimento() - 150);
-          vectorCivilizacion[numJugador1]->setOro( vectorCivilizacion[numJugador1]->getOro() - 90);
-          cout<<"Guerro Especial agregado exitosamente."<<endl;
+        if ( ((cantAlimentos-150) > -1) && ((cantOro-90) > -1) ){
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setTropas(new Caballeria("masculino",100,200,200,200,150,30,1,0));
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setAlimento( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getAlimento() -150 );
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setOro( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getOro() - 90 );
+            cout<<"Guerro Especial agregado exitosamente."<<endl;
         }else
             cout<<"No tiene suficiente recursos."<<endl;
     }else{
         if ( ((cantAlimentos-150 > -1) && ((cantOro-90) > -1) )){
-            tropasj2.push_back(new Caballeria("masculino",100,200,200,200,150,30,1,0));
-          vectorCivilizacion[numJugador2]->setAlimento( vectorCivilizacion[numJugador2]->getAlimento() - 150);
-          vectorCivilizacion[numJugador2]->setOro( vectorCivilizacion[numJugador2]->getOro() - 90);
-          vectorJugadores[numJugador2]->getCivilizacion().setOro( )
-          cout<<"Guerrero Especial agregado exitosamente."<<endl;
+            vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setTropas(new Caballeria("masculino",100,200,200,200,150,30,1,0));
+            vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setAlimento( vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getAlimento() -150 );
+            vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setOro( vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getOro() - 90 );
+            cout<<"Guerrero Especial agregado exitosamente."<<endl;
         }else
             cout<<"No tiene suficiente recursos."<<endl;
     }
 }
 void nuevaTropa(){
     estadoActual();
-     //int cantOro, cantMadera, cantPiedra, cantAlimentos;
     int opt;
     cout << "Que tropa desea? "<<endl
     << "1. Soldado ($90 Alimento y $25 Oro)" << endl
@@ -517,10 +540,22 @@ void nuevaTropa(){
 
 void desterrarPoblacion(){
     if(esJ1){
-        for(int i = 0; i < aldeanosj1.size(); i++){
-            aldeanosj1[i]->setCostoAlimentacion(100);
+        char respuesta;
+        cout<<"ESTA SEGURO DE ELIMINAR SU CIVILIZACION? [s/n]"<<endl;
+        cin >> respuesta;
+
+        if(respuesta == 's'){
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->deleteCivilizacion();
+            cout<<"Civilizacion borrada. "<<endl;
         }
     }else{
+        char respuesta;
+        cout<<"ESTA SEGURO DE ELIMINAR SU CIVILIZACION? [s/n]"<<endl;
+        cin >> respuesta;
+
+        if(respuesta == 's'){
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->deleteCivilizacion();
+        }
 
     }
 }
@@ -535,6 +570,7 @@ void ingresar(){
     cout<<"Con cual jugador desea comenzar: "<<endl;
     cin >> numJugador1;
     numJugador1--;
+    
     //EL JUGADOR DOS LO ASIGNAMOOS EN BATALLAAAAAAAA
 
     if(numJugador1==0)

@@ -29,7 +29,7 @@ class Civilizacion{
         int getSizevEdificios();
         int getSizevTropas();
 
-        bool hayCuarteles();
+        void deleteCivilizacion();
         
         Aldeanos* getAldeano(int n);
         void setAldeanos(Aldeanos*);

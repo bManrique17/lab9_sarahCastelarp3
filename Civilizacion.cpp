@@ -1,4 +1,6 @@
 #include "Civilizacion.h"
+#include "Cuarteles.h"
+#include "Edificio.h"
 
 Civilizacion::Civilizacion(string nombreCivilizacion, int oro, int madera, int piedra, int alimento, int poblacionMaxima, int poblacionActual, int capacidadPoblacion){
     this->nombreCivilizacion = nombreCivilizacion;
@@ -11,11 +13,16 @@ Civilizacion::Civilizacion(string nombreCivilizacion, int oro, int madera, int p
     this->capacidadPoblacion = capacidadPoblacion;
 }
 
-bool Civilizacion::hayCuarteles(){
-    for(int i = 0; i < vectorEdificios.size(); i++){
-        
-    }
+void Civilizacion::deleteCivilizacion(){
+    vectorAldeanos.clear();
+    vectorEdificios.clear();
+    vectorTropas.clear();
+    oro = 0;
+    madera = 0;
+    piedra = 0;
+    alimento = 100;
 }
+
 int Civilizacion::getSizevAldeanos(){
     return vectorAldeanos.size();
 }

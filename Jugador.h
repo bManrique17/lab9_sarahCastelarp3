@@ -8,7 +8,7 @@ class Jugador{
     private:
         string nombre;
      //   Civilizacion* civili; 
-        vector<Civilizacion*> civili;
+        vector<Civilizacion*> vectorCivi;
 
     public:
         Jugador(string, Civilizacion*);
@@ -16,8 +16,11 @@ class Jugador{
         string getNombre();
         void setNombre(string);
 
-        Civilizacion getCivilizacion();
-        void setCivilizacion(Civilizacion);
+        Civilizacion* getCivilizacion(int n);
+        void setCivilizacion(Civilizacion*);
+        int getSizevCili();
+
+        int getCiviPerteneciente();
         
         ~Jugador();
         
