@@ -7,7 +7,10 @@
 
 class Casas: public Edificio{
     private:
-        vector<Aldeanos*> vectorAldeanos;
+
+    public:
+        Casas(int,int,int);
+        ~Casas();
     
 
 };

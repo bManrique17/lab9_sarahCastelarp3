@@ -2,7 +2,7 @@
 #define EDIFICIO_H
 
 class Edificio{
-    private:
+    protected:
         int costoOro;
         int costoMadera;
         int costoPiedra;

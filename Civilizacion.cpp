@@ -1,6 +1,7 @@
 #include "Civilizacion.h"
 
-Civilizacion::Civilizacion(int oro, int madera, int piedra, int alimento, int poblacionMaxima, int poblacionActual, int capacidadPoblacion){
+Civilizacion::Civilizacion(string nombreCivilizacion, int oro, int madera, int piedra, int alimento, int poblacionMaxima, int poblacionActual, int capacidadPoblacion){
+    this->nombreCivilizacion = nombreCivilizacion;
     this->oro = oro;
     this->madera = madera;
     this->piedra = piedra;
@@ -8,6 +9,14 @@ Civilizacion::Civilizacion(int oro, int madera, int piedra, int alimento, int po
     this->poblacionMaxima = poblacionMaxima;
     this->poblacionActual = poblacionActual;
     this->capacidadPoblacion = capacidadPoblacion;
+}
+
+string Civilizacion::getNombreCivilizacion(){
+    return nombreCivilizacion;
+}
+
+void Civilizacion::setNombreCivilizacion(string nombre){
+    this->nombreCivilizacion = nombreCivilizacion;
 }
 
 int Civilizacion::getOro(){

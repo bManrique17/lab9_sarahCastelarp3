@@ -10,7 +10,7 @@ class Jugador{
         Civilizacion civili; 
 
     public:
-        Jugador(string, Civilizacion);
+        Jugador(string, Civilizacion*);
 
         string getNombre();
         void setNombre(string);

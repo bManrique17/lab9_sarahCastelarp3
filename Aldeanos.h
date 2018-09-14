@@ -17,6 +17,7 @@ class Aldeanos{
         int getCostoAlimentacion();
         void setCostoAlimentacion(int);
 
+
         ~Aldeanos();
 
 };
