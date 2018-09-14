@@ -8,11 +8,13 @@ int GuerrerosEspeciales::getAtaqueNeto(){
     return ataqueNeto;
 }
 
-
 void GuerrerosEspeciales::setAtaqueNeto(int vidaOponente){
     this->ataqueNeto = this->getAtaque() * (1+ (this->getVelocidad() / 5)) + vidaOponente*0.15;
 }
 
+void Ataque(){
+    cout<<"ho"<<endl;
+}
 GuerrerosEspeciales::~GuerrerosEspeciales(){
 
 }

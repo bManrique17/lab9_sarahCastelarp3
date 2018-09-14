@@ -7,7 +7,8 @@ using namespace std;
 class Jugador{
     private:
         string nombre;
-        Civilizacion civili; 
+     //   Civilizacion* civili; 
+        vector<Civilizacion*> civili;
 
     public:
         Jugador(string, Civilizacion*);

@@ -12,7 +12,7 @@ class Caballeria:public Tropa{
         int getAtaqueNeto();
         void setAtaqueNeto(int);
 
-        virtual void ataque();
+        virtual void Ataque();
 
         ~Caballeria();
 

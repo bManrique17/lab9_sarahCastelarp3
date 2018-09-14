@@ -11,6 +11,46 @@ Civilizacion::Civilizacion(string nombreCivilizacion, int oro, int madera, int p
     this->capacidadPoblacion = capacidadPoblacion;
 }
 
+bool Civilizacion::hayCuarteles(){
+    for(int i = 0; i < vectorEdificios.size(); i++){
+        
+    }
+}
+int Civilizacion::getSizevAldeanos(){
+    return vectorAldeanos.size();
+}
+
+int Civilizacion::getSizevEdificios(){
+    return vectorEdificios.size();
+}
+
+int Civilizacion::getSizevTropas(){
+    return vectorTropas.size();
+}
+
+Aldeanos* Civilizacion::getAldeano(int n){
+    return vectorAldeanos[n];
+}
+void Civilizacion::setAldeanos(Aldeanos* aldeanos){
+    this->vectorAldeanos.push_back(aldeanos);
+}
+
+Edificio* Civilizacion::getEdificio(int n){
+    return vectorEdificios[n];
+}
+
+void Civilizacion::setEdificios(Edificio* e){
+    this->vectorEdificios.push_back(e);
+}
+
+Tropa* Civilizacion::getTropa(int n){
+    return vectorTropas[n];
+}
+
+void Civilizacion::setTropas(Tropa* t){
+    this->vectorTropas.push_back(t);
+}
+
 string Civilizacion::getNombreCivilizacion(){
     return nombreCivilizacion;
 }

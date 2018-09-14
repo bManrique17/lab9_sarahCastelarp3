@@ -1,7 +1,7 @@
 #include "Jugador.h"
 #include "Civilizacion.h"
 
-Jugador::Jugador(string nombre, Civilizacion civili){
+Jugador::Jugador(string nombre, Civilizacion* civili){
     this->nombre = nombre;
     this->civili = civili;
 }

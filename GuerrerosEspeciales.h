@@ -12,7 +12,7 @@ class GuerrerosEspeciales:public Tropa{
         int getAtaqueNeto();
         void setAtaqueNeto(int);
 
-        virtual void ataque();
+        virtual void Ataque();
 
         ~GuerrerosEspeciales();
 

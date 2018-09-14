@@ -7,7 +7,7 @@ class Soldados:public Tropa{
     
     public:
         Soldados(string,int,int,int,int,int,int,int);
-        virtual void ataque();
+        virtual void Ataque();
         ~Soldados();
 
 };
