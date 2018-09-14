@@ -1,6 +1,7 @@
 #include "Civilizacion.h"
 #include "Cuarteles.h"
 #include "Edificio.h"
+#include "Tropa.h"
 
 Civilizacion::Civilizacion(string nombreCivilizacion, int oro, int madera, int piedra, int alimento, int poblacionMaxima, int poblacionActual, int capacidadPoblacion){
     this->nombreCivilizacion = nombreCivilizacion;

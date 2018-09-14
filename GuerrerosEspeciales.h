@@ -1,6 +1,7 @@
 #ifndef GUERREROSESPECIALES_H
 #define GUERREROSESPECIALES_H
 #include "Tropa.h"
+#include "Jugador.h"
 
 class GuerrerosEspeciales:public Tropa{
     private:
@@ -12,7 +13,7 @@ class GuerrerosEspeciales:public Tropa{
         int getAtaqueNeto();
         void setAtaqueNeto(int);
 
-        virtual void Ataque();
+        virtual void Ataque(int, int,int,int, vector<Jugador*>);
 
         ~GuerrerosEspeciales();
 

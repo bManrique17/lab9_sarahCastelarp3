@@ -17,26 +17,11 @@ using namespace std;
 vector<Civilizacion*> vectorCivilizacion;
 vector<Jugador*> vectorJugadores;
 
-//jugador 1
-vector<Aldeanos*> aldeanosj1;
-vector<Edificio*> edificiosj1;
-    vector<Casas*> casasj1;
-    vector<Cuarteles*> cuartelesj1;
-    vector<Castillos*> castillosj1;
-vector<Tropa*> tropasj1;
-
-
-//jugador2
-vector<Aldeanos*> aldeanosj2;
-vector<Edificio*> edificiosj2;
-    vector<Casas*> casasj2;
-    vector<Cuarteles*> cuartelesj2;
-    vector<Castillos*> castillosj2;
-vector<Tropa*> tropasj2;
 
 
 bool esJ1 = true;
 int numJugador1, numJugador2, numCivi = 0;
+int JugadorActual;
 int cantOro, cantMadera, cantPiedra, cantAlimentos;
 int menu();
 void crearCivilizacion();
@@ -58,7 +43,9 @@ void desterrarPoblacion();
 void Batalla();
 void estadoActual();
 int totalAlimentoAldeanos();
-
+void listarTropas();
+bool yaGano();
+void quienEs();
 
 int main (){
 	int opcion = 0;
@@ -192,7 +179,7 @@ void crearJugador(){
 
 void estadoActual(){
     if(esJ1){
-        cout<<"Aldeanos Disponibles: "<< aldeanosj1.size()+1 << endl;
+        cout<<"Aldeanos Disponibles: "<< vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getSizevAldeanos()+1 << endl;
         //int cantOro, cantMadera, cantPiedra, cantAlimentos;
         //cantOro = vectorCivilizacion[numJugador1]->getOro();
         cantOro = vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getOro();
@@ -205,7 +192,7 @@ void estadoActual(){
        // cantAlimentos = totalAlimentoAldeanos();
 
     }else {
-        cout<<"Aldeanos Disponibles: "<< aldeanosj2.size()+1 << endl;
+        cout<<"Aldeanos Disponibles: "<<  vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getSizevAldeanos()+1 << endl;
         //int cantOro, cantMadera, cantPiedra, cantAlimentos;
         /*cantOro = vectorCivilizacion[numJugador2]->getOro();
         cantMadera = vectorCivilizacion[numJugador2]->getMadera();
@@ -222,12 +209,12 @@ int totalAlimentoAldeanos(){
     int totalAlimento = 0;
 
     if(esJ1){
-        for(int i = 0; i < aldeanosj1.size(); i++){
+        for(int i = 0; i <  vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getSizevAldeanos(); i++){
         //totalAlimento += aldeanosj1[i]->getCostoAlimentacion();
         totalAlimento += vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getAldeano(i)->getCostoAlimentacion();
         }
     }else{
-        for(int i = 0; i < aldeanosj2.size(); i++){
+        for(int i = 0; i <  vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getSizevAldeanos(); i++){
       //  totalAlimento += aldeanosj2[i]->getCostoAlimentacion();
             totalAlimento += vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getAldeano(i)->getCostoAlimentacion();
         }
@@ -560,7 +547,77 @@ void desterrarPoblacion(){
     }
 }
 
+bool yaGano(){
+    bool gano = false;
+    if (vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getSizevTropas() == 0){
+        cout<<"Gana el jugador 2. "<<endl;
+        gano = true;
+    }
+        
+    else{
+        cout<<"Gana el jugador 1."<<endl;
+        gano=true;
+    }
 
+    return gano;
+}
+
+void listarTropas(){
+    for(int i = 0; i < vectorJugadores[JugadorActual]->getCivilizacion(numCivi)->getSizevTropas(); i++ ){
+        cout<<i+1<<". "<<vectorJugadores[JugadorActual]->getCivilizacion(numCivi)->getTropa(i)<<endl;
+    }
+}
+
+void quienEs(){
+    if (JugadorActual == numJugador1){
+        cout<<"Turno Jugador 1: "<<endl;
+    }else
+        cout<<"Turno Jugador 2: "<<endl;
+}
+
+void Batalla(){
+    int opt;
+    printJugadores();
+    cout<<"Con que jugador desea jugar?"<<endl;
+    cin >> opt;
+    while ((numJugador1 == opt) || (opt < 0 || opt > vectorJugadores.size())){
+        printJugadores();
+        cout<<"Invalido. Ingrese de nuevo su jugador 2: "<<endl;
+        cin>>opt;
+    } 
+    numJugador2 = opt; //aqui lo declaroo desde la variable globaaal. 
+
+    int opcionAtacar1, opcionAtacar2;
+    do
+    {
+        JugadorActual = numJugador1;
+        quienEs();
+        listarTropas();
+        cout<<"Que jugador desea para atacar? "<<endl;
+        cin>>opcionAtacar1;
+        while (opcionAtacar1 < 0 || opcionAtacar1 > vectorJugadores[JugadorActual]->getCivilizacion(numCivi)->getSizevTropas()){
+            cout<<"Error. Opcion fuera de rango. Ingrese otra vez: "<<endl;
+            cin >> opcionAtacar1;
+        }
+
+        JugadorActual = numJugador2;
+        quienEs();
+        listarTropas();
+        cout<<"Que jugador desea para atacar? "<<endl;
+        cin>>opcionAtacar1;
+        while (opcionAtacar1 < 0 || opcionAtacar1 > vectorJugadores[JugadorActual]->getCivilizacion(numCivi)->getSizevTropas()){
+            cout<<"Error. Opcion fuera de rango. Ingrese otra vez: "<<endl;
+            cin >> opcionAtacar1;
+        }
+
+        //los dos jugadores selecciona su tropa, y luego el que pega primero es el jugador1. 
+        //orden: jugadorActual(Tropa),contricante(tropa),numero del vector del Jugdor Actual, numero del vector del contricante.
+        vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getTropa(opcionAtacar1)->Ataque(opcionAtacar1,opcionAtacar2,numJugador1,numJugador2,vectorJugadores);
+        vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getTropa(opcionAtacar2)->Ataque(opcionAtacar1,opcionAtacar2,numJugador1,numJugador2,vectorJugadores);
+
+    } while(!yaGano);
+
+}
 
 void ingresar(){
     //bool esJ1 = true;
@@ -602,7 +659,7 @@ void ingresar(){
             break;
 
             case 6:
-
+                Batalla();
             break;
 
             case 7:

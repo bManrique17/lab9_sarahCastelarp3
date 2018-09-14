@@ -26,6 +26,8 @@ int Jugador::getSizevCili(){
     return vectorCivi.size();
 }
 
+
+
 Jugador::~Jugador(){
     
 }

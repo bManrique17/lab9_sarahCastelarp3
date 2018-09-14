@@ -2,7 +2,9 @@
 #define TROPA_H
 #include "Aldeanos.h"
 #include <iostream>
-using namespace std; 
+using namespace std;
+#include <vector>
+#include "Jugador.h"
 
 class Tropa{
     private:
@@ -18,7 +20,7 @@ class Tropa{
     public:
         Tropa(string,int,int,int,int,int,int,int);
 
-        virtual void Ataque()=0;
+        virtual void Ataque(int, int,int,int,vector<Jugador*>)=0;
 
         string getSexo();
         void setSexo(string);
@@ -43,6 +45,8 @@ class Tropa{
 
         int getTiempoEntrenamiento();
         void setTiempoEntrenamiento(int);
+
+        void toString1();
 
         ~Tropa();
 

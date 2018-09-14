@@ -9,6 +9,10 @@ Tropa::Tropa(string sexo, int costoAlimentacion, int costoOro, int ataque, int d
     this->tiempoEntrenamiento = tiempoEntrenamiento;
 }
 
+void Tropa::toString1(){
+    cout<<"Ataque: "<<ataque<<"\n Defensa: "<<defensa<<"\n Vida Restante: "<<vida<<endl;
+}
+
 string Aldeanos::getSexo(){
     return sexo;
 }
