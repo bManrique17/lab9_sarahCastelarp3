@@ -3,6 +3,8 @@
 #include "Aldeanos.h"
 #include "Edificio.h"
 #include "Tropa.h"
+#include "Caballeria.h"
+#include "GuerrerosEspeciales.h"
 #include <iostream>
 #include <vector>
 using namespace std;

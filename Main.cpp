@@ -9,6 +9,7 @@
 #include "Jugador.h"
 #include "Soldados.h"
 #include "Tropa.h"
+#include "TropaGeneral.h"
 #include <iostream>
 
 #include <vector>
@@ -432,7 +433,7 @@ void agregarSoldado(){
 
         if(hayCuarteles()){//si no esta vacio si puede entrenar tropas.
             if ( ((cantAlimentos-90) > -1) && ((cantOro-25) > -1) ){
-                vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setTropas(new Soldados("masculino",20,25,40,20,30,10,2));
+                vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setTropas(new Soldados(0,"masculino",20,25,40,20,30,10,2));
                 vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setAlimento( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getAlimento() - 90 );
                 vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setOro( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getOro() - 25 );
                 cout<<"Soldado agregado exitosamente. "<<endl;
@@ -446,7 +447,7 @@ void agregarSoldado(){
 
         if(hayCuarteles()){//si no esta vacio si puede entrenar tropas.
             if ( ((cantAlimentos-90) > -1) && ((cantOro-25) > -1) ){
-                vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setTropas(new Soldados("masculino",20,25,40,20,30,10,2));
+                vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setTropas(new Soldados(0,"masculino",20,25,40,20,30,10,2));
                 vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setAlimento( vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getAlimento() - 90 );
                 vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setOro( vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getOro() - 25 );
                 cout<<"Soldado agregado exitosamente. "<<endl;
@@ -460,7 +461,7 @@ void agregarSoldado(){
 void agregarCaballeria(){
     if(esJ1){
         if ( ((cantAlimentos-110) > -1) && ((cantOro-60) > -1) ){
-            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setTropas(new Caballeria("femenino",50,20,60,70,80,30,1,0));
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setTropas(new Caballeria(0,"femenino",50,20,60,70,80,30,1,0));
             vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setAlimento( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getAlimento() - 110 );
             vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setOro( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getOro() - 60 );
             cout<<"Caballeria agregada exitosamente."<<endl;
@@ -468,7 +469,7 @@ void agregarCaballeria(){
             cout<<"No tiene suficientes recursos."<<endl;
     }else{
         if ( ((cantAlimentos-110) > -1) && ((cantOro-60) > -1) ){
-            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setTropas(new Caballeria("femenino",50,20,60,70,80,30,1,0));
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setTropas(new Caballeria(0,"femenino",50,20,60,70,80,30,1,0));
             vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setAlimento( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getAlimento() - 110 );
             vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setOro( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getOro() - 60 );
             cout<<"Caballeria agregada exitosamente."<<endl;
@@ -480,7 +481,7 @@ void agregarCaballeria(){
 void agregarGuerreroEspecial(){
     if(esJ1){
         if ( ((cantAlimentos-150) > -1) && ((cantOro-90) > -1) ){
-            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setTropas(new Caballeria("masculino",100,200,200,200,150,30,1,0));
+            vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setTropas(new Caballeria(0,"masculino",100,200,200,200,150,30,1,0));
             vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setAlimento( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getAlimento() -150 );
             vectorJugadores[numJugador1]->getCivilizacion(numCivi)->setOro( vectorJugadores[numJugador1]->getCivilizacion(numCivi)->getOro() - 90 );
             cout<<"Guerro Especial agregado exitosamente."<<endl;
@@ -488,7 +489,7 @@ void agregarGuerreroEspecial(){
             cout<<"No tiene suficiente recursos."<<endl;
     }else{
         if ( ((cantAlimentos-150 > -1) && ((cantOro-90) > -1) )){
-            vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setTropas(new Caballeria("masculino",100,200,200,200,150,30,1,0));
+            vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setTropas(new Caballeria(0,"masculino",100,200,200,200,150,30,1,0));
             vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setAlimento( vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getAlimento() -150 );
             vectorJugadores[numJugador2]->getCivilizacion(numCivi)->setOro( vectorJugadores[numJugador2]->getCivilizacion(numCivi)->getOro() - 90 );
             cout<<"Guerrero Especial agregado exitosamente."<<endl;

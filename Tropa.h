@@ -6,7 +6,7 @@ using namespace std;
 #include <vector>
 #include "Jugador.h"
 
-class Tropa{
+class Tropa:public TropaGeneral{
     private:
         string sexo;
         int costoAlimentacion;
@@ -18,9 +18,9 @@ class Tropa{
         int tiempoEntrenamiento;
 
     public:
-        Tropa(string,int,int,int,int,int,int,int);
+        Tropa(int,string,int,int,int,int,int,int,int);
 
-        virtual void Ataque(int, int,int,int,vector<Jugador*>)=0;
+        virtual void Ataque(int, int,int,int,vector<Jugador*>);
 
         string getSexo();
         void setSexo(string);

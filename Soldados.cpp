@@ -1,7 +1,7 @@
 #include "Soldados.h"
 #include "Jugador.h"
 
-Soldados::Soldados(string sexo,int costoAlimentacion, int costoOro, int ataque, int defensa,int vida,  int velocidad, int tiempoEntrenamiento):Tropa("masculino",20,25,40,20,30,10,2){
+Soldados::Soldados(int numero, string sexo,int costoAlimentacion, int costoOro, int ataque, int defensa,int vida,  int velocidad, int tiempoEntrenamiento):Tropa("masculino",20,25,40,20,30,10,2){
 
 }
 

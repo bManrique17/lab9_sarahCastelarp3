@@ -1,14 +1,14 @@
-main.o:	Main.o Aldeanos.o Caballeria.o Casas.o Castillos.o Civilizacion.o Cuarteles.o Edificio.o GuerrerosEspeciales.o Jugador.o Soldados.o Tropa.o
-	g++ Main.o Aldeanos.o Caballeria.o Casas.o Castillos.o Civilizacion.o Cuarteles.o Edificio.o GuerrerosEspeciales.o Jugador.o Soldados.o Tropa.o -o main
+Main.o:	Main.o Aldeanos.o Caballeria.o Casas.o Castillos.o Civilizacion.o Cuarteles.o Edificio.o GuerrerosEspeciales.o Jugador.o Soldados.o Tropa.o TropaGeneral.o
+	g++ Main.o Aldeanos.o Caballeria.o Casas.o Castillos.o Civilizacion.o Cuarteles.o Edificio.o GuerrerosEspeciales.o Jugador.o Soldados.o Tropa.o TropaGeneral.o -o main
 	rm *.o
 
-Main.o:	Main.cpp Aldeanos.h Caballeria.h Casas.h Castillos.h Civilizacion.h Cuarteles.h Edificio.h GuerrerosEspeciales.h Jugador.h Soldados.h Tropa.h
+Main.o:	Main.cpp Aldeanos.h TropaGeneral.h Caballeria.h Casas.h Castillos.h Civilizacion.h Cuarteles.h Edificio.h GuerrerosEspeciales.h Jugador.h Soldados.h Tropa.h
 	g++ -c Main.cpp
 
 Aldeanos.o:	Aldeanos.h
 	g++ -c Aldeanos.cpp
 
-Caballeria.o:	Tropa.h Caballeria.h
+Caballeria.o:	Tropa.h Caballeria.h TropaGeneral.h
 	g++ -c Caballeria.cpp
 
 Casas.o:	Edificio.h Aldeanos.h Casas.h
@@ -37,3 +37,6 @@ Soldados.o:	Tropa.h Jugador.h Soldados.h
 
 Tropa.o:	Aldeanos.h Jugador.h Tropa.h
 	g++ -c Tropa.cpp
+
+TropaGeneral.o:	TropaGeneral.h Jugador.h
+	g++ -c TropaGeneral.cpp

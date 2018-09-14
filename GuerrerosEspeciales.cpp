@@ -1,6 +1,6 @@
 #include "GuerrerosEspeciales.h"
 
-GuerrerosEspeciales::GuerrerosEspeciales(string sexo, int costoAlimentacion, int costoOro, int ataque, int defensa, int vida, int velocidad, int tiempoEntrenamiento, int ataqueNeto):Tropa(sexo, costoAlimentacion, costoOro, ataque+10, defensa+10, vida, velocidad,3){
+GuerrerosEspeciales::GuerrerosEspeciales(int numero, string sexo, int costoAlimentacion, int costoOro, int ataque, int defensa, int vida, int velocidad, int tiempoEntrenamiento, int ataqueNeto):Tropa(0,sexo, costoAlimentacion, costoOro, ataque+10, defensa+10, vida, velocidad,3){
     this->ataqueNeto = -1;
 }
 

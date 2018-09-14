@@ -1,6 +1,7 @@
 #include "Tropa.h"
+#include "TropaGeneral.h"
 
-Tropa::Tropa(string sexo, int costoAlimentacion, int costoOro, int ataque, int defensa, int vida, int velocidad, int tiempoEntrenamiento){
+Tropa::Tropa(int numero, string sexo, int costoAlimentacion, int costoOro, int ataque, int defensa, int vida, int velocidad, int tiempoEntrenamiento):TropaGeneral(0){
     this->costoOro = costoOro;
     this->ataque = ataque;
     this->defensa = defensa;
